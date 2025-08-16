@@ -9,21 +9,22 @@ import (
 	"task-manager/internal/handlers"
 	"task-manager/internal/repository"
 	svc "task-manager/internal/services"
-	db "task-manager/internal/store"
+	"task-manager/internal/store"
 	"task-manager/pkg/logger"
+
 )
 
 type Rest struct {
 	config   *config.Config
 	handlers *handlers.Handlers
 	srv      *http.Server
-	store    *db.Store
+	store    *store.Store
 	service  *svc.TaskService
 	router   *http.ServeMux
 }
 
 func NewRest(cfg *config.Config) *Rest {
-	store := db.NewStore()
+	store := store.NewStore()
 	repository := repository.NewRepository(store)
 	taskService := svc.NewTaskService(repository)
 	taskHandlers := handlers.NewHandlers(taskService)
@@ -66,8 +67,8 @@ func initRouter(h *handlers.Handlers) *http.ServeMux {
 	})
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusForbidden)
-		w.Write([]byte("Forbidden"))
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("test task for LO"))
 	})
 
 	return router

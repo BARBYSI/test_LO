@@ -48,7 +48,7 @@ func (r *Repository) GetTask(ctx context.Context, id int) (models.Task, error) {
 	default:
 		task, ok := r.store.Get(id)
 		if !ok {
-			logger.LogInfo(fmt.Sprintf("task %d not found", id))
+			logger.LogInfo(fmt.Sprintf("task with id %d not found", id))
 			return models.Task{}, ErrTaskNotFound
 		}
 		return task, nil

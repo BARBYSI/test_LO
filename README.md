@@ -62,7 +62,7 @@ Run this command in the project root (where your Dockerfile is):
 
 - The project uses **only the Go standard library** (`net/http`, etc.)—no external dependencies.
 - Docker is used only for containerizing and running the app.
-- The root endpoint `/` returns HTTP 403 Forbidden.
+- The root endpoint `/` returns HTTP 200 OK.
 
 ---
 
